@@ -12,7 +12,6 @@ export const getProducts = async (req, res) => {
 export const getProductById = async (req, res) => {
     try {
         const productFound = await Product.findById(req.params.id)
-        console.log(productFound)
         return res.json(productFound)
     } catch (error) {
         return res.status(401).json({ message: "Product not found" })
@@ -31,7 +30,6 @@ export const cretateProduct = async (req, res) => {
 }
 
 export const updateProduct = async (req, res) => {
-    console.log(req.params.id, req.file)
     try {
         const { title, description, price, image } = req.body
         const productUpdated = await Product.findByIdAndUpdate(req.params.id, { title, description, price, image:req.file?.filename || image }, { new: true })
